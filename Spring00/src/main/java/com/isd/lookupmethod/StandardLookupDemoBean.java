@@ -7,13 +7,11 @@ public class StandardLookupDemoBean implements DemoBean {
 		this.myHelper = myHelper;
 	}
 
-	@Override
 	public MyHelper getMyHelper() {
 		// TODO Auto-generated method stub
 		return myHelper;
 	}
 
-	@Override
 	public void someOperation() {
 		// TODO Auto-generated method stub
 		myHelper.doSomething();
