@@ -50,6 +50,9 @@ public class Spring00 {
 		DemoBean abstr = ac.getBean("abstractLookupDemoBean", AbstractLookupDemoBean.class);
 		spr2.showMe(stand);
 		spr2.showMe(abstr);
+		
+		
+		System.out.println("The end!");
 	}
 
 	public void showMe(DemoBean bean) {
