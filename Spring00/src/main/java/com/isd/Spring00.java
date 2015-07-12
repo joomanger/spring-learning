@@ -1,14 +1,17 @@
 package com.isd;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -28,15 +31,26 @@ public class Spring00 {
 	@Resource(name = "list")
 	private List<String> list;
 
+	private FileInputStream fs = null;
+
+	@PostConstruct
+	public void initMe() throws Exception {
+		System.out.println("initMe()");
+		fs = new FileInputStream(new File("text.txt"));
+	}
+
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/appl-context.xml");
+		GenericXmlApplicationContext ac = new GenericXmlApplicationContext("META-INF/spring/appl-context.xml");
 		User user = ac.getBean("user", User.class);
+		ac.registerShutdownHook();
 
 		System.out.println(user);
 
-		ApplicationContext ac_annot = new ClassPathXmlApplicationContext("META-INF/spring/appl-context-annotation.xml");
+		GenericXmlApplicationContext ac_annot = new GenericXmlApplicationContext(
+				"META-INF/spring/appl-context-annotation.xml");
+		ac_annot.registerShutdownHook();
 		User user2 = ac_annot.getBean("user", User.class);
 		System.out.println(user2);
 
@@ -44,15 +58,23 @@ public class Spring00 {
 		spr.displayInfo();
 
 		Spring00 spr2 = ac_annot.getBean("main", Spring00.class);
+
 		spr2.displayInfo();
 
 		DemoBean stand = ac.getBean("standardLookupDemoBean", StandardLookupDemoBean.class);
 		DemoBean abstr = ac.getBean("abstractLookupDemoBean", AbstractLookupDemoBean.class);
 		spr2.showMe(stand);
 		spr2.showMe(abstr);
-		
-		
+
 		System.out.println("The end!");
+		// ac.destroy();
+		// ac_annot.destroy();
+	}
+
+	@PreDestroy
+	public void destroyMe() throws Exception {
+		System.out.println("Выполняю destroyMe()");
+		fs.close();
 	}
 
 	public void showMe(DemoBean bean) {
