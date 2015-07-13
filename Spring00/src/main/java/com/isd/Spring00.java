@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -21,7 +22,7 @@ import com.isd.lookupmethod.MyHelper;
 import com.isd.lookupmethod.StandardLookupDemoBean;
 
 @Component("main")
-public class Spring00 {
+public class Spring00 implements BeanNameAware {
 	@Resource(name = "set")
 	private Set<String> set;
 	@Resource(name = "prop")
@@ -30,6 +31,8 @@ public class Spring00 {
 	private Map<String, Object> map;
 	@Resource(name = "list")
 	private List<String> list;
+
+	private String beanName;
 
 	private FileInputStream fs = null;
 
@@ -73,7 +76,7 @@ public class Spring00 {
 
 	@PreDestroy
 	public void destroyMe() throws Exception {
-		System.out.println("Выполняю destroyMe()");
+		System.out.println("Bean[" + beanName + "]Выполняю destroyMe()");
 		fs.close();
 	}
 
@@ -135,6 +138,12 @@ public class Spring00 {
 			System.out.println(t);
 		}
 
+	}
+
+	@Override
+	public void setBeanName(String arg0) {
+		// TODO Auto-generated method stub
+		this.beanName = arg0;
 	}
 
 }

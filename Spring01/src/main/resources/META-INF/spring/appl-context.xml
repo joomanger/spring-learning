@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+  						http://www.springframework.org/schema/context/spring-context.xsd
+  						http://www.springframework.org/schema/util
+  						http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+	
+	<bean id="shaDigest" class="com.isd.MessageDigestBeanFactory" p:algorithm="SHA1"/>
+	<bean id="md5Digest" class="com.isd.MessageDigestBeanFactory" p:algorithm="MD5"/>
+	
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.isd" />
+	<!-- <bean id="md5Digest" class="com.isd.MessageDigestBeanFactory" /> <bean 
+		id="shaDigest" class="com.isd.MessageDigestBeanFactory"> <property name="algorithm"> 
+		<value>SHA1</value> </property> </bean> <bean id="digester" class="com.isd.MessageDigester" 
+		p:digest-ref="md5Digest" /> -->
+
+</beans>
