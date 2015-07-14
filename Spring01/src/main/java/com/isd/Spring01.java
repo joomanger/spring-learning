@@ -14,6 +14,5 @@ public class Spring01 {
 		MessageDigester md = ctx.getBean("digester", MessageDigester.class);
 		md.digest("Hello World!");
 		ctx.close();
-
 	}
 }

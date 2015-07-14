@@ -11,6 +11,7 @@ public class MessageDigester {
 
 	private MessageDigest digest1 = null;
 	private MessageDigest digest2 = null;
+
 	private String msg = null;
 
 	@Resource(name = "shaDigest")
@@ -21,7 +22,6 @@ public class MessageDigester {
 	@Resource(name = "md5Digest")
 	public void setDigest2(MessageDigest digest2) {
 		this.digest2 = digest2;
-
 	}
 
 	public void digest(String msg) {
@@ -36,6 +36,11 @@ public class MessageDigester {
 		byte[] bytes = msg.getBytes();
 		byte[] out = digest.digest(bytes);
 		System.out.println("Algorithm [" + digest.getAlgorithm() + "]" + out);
+		StringBuffer hexString = new StringBuffer();
+		for (int i = 0; i < out.length; i++) {
+			hexString.append(Integer.toHexString(0xFF & out[i]));
+		}
+		System.out.println(hexString.toString());
 	}
 
 }
