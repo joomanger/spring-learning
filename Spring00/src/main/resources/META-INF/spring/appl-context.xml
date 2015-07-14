@@ -9,8 +9,7 @@
 
 	<bean id="user" class="com.isd.User" p:auto-ref="auto" />
 
-	<bean id="main" class="com.isd.Spring00" init-method="initMe"
-		destroy-method="destroyMe">
+	<bean id="main" class="com.isd.Spring00" init-method="initMe" destroy-method="destroyMe">
 		<property name="set">
 			<set>
 				<value>Hello</value>
@@ -52,5 +51,7 @@
 	<bean id="abstractLookupDemoBean" class="com.isd.lookupmethod.AbstractLookupDemoBean">
 		<lookup-method name="getMyHelper" bean="myHelper" />
 	</bean>
+
+
 
 </beans>

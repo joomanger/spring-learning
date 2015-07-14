@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -22,7 +21,7 @@ import com.isd.lookupmethod.MyHelper;
 import com.isd.lookupmethod.StandardLookupDemoBean;
 
 @Component("main")
-public class Spring00 implements BeanNameAware {
+public class Spring00 {
 	@Resource(name = "set")
 	private Set<String> set;
 	@Resource(name = "prop")
@@ -32,10 +31,8 @@ public class Spring00 implements BeanNameAware {
 	@Resource(name = "list")
 	private List<String> list;
 
-	private String beanName;
-
 	private FileInputStream fs = null;
-
+	
 	@PostConstruct
 	public void initMe() throws Exception {
 		System.out.println("initMe()");
@@ -61,7 +58,7 @@ public class Spring00 implements BeanNameAware {
 		spr.displayInfo();
 
 		Spring00 spr2 = ac_annot.getBean("main", Spring00.class);
-
+		
 		spr2.displayInfo();
 
 		DemoBean stand = ac.getBean("standardLookupDemoBean", StandardLookupDemoBean.class);
@@ -70,13 +67,13 @@ public class Spring00 implements BeanNameAware {
 		spr2.showMe(abstr);
 
 		System.out.println("The end!");
-		// ac.destroy();
-		// ac_annot.destroy();
+		//ac.destroy();
+		//ac_annot.destroy();
 	}
-
+	
 	@PreDestroy
 	public void destroyMe() throws Exception {
-		System.out.println("Bean[" + beanName + "]Выполняю destroyMe()");
+		System.out.println("Выполняю destroyMe()");
 		fs.close();
 	}
 
@@ -138,12 +135,6 @@ public class Spring00 implements BeanNameAware {
 			System.out.println(t);
 		}
 
-	}
-
-	@Override
-	public void setBeanName(String arg0) {
-		// TODO Auto-generated method stub
-		this.beanName = arg0;
 	}
 
 }

@@ -1,18 +1,40 @@
 package com.isd;
 
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.stereotype.Component;
+import java.util.Date;
 
-@Component("main")
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 public class Spring01 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello world!");
+	private Name name;
+	private Date datez;
+	
+	
 
+	public Date getDatez() {
+		return datez;
+	}
+
+	public void setDatez(Date datez) {
+		this.datez = datez;
+	}
+
+	public Name getName() {
+		return name;
+	}
+
+	public void setName(Name name) {
+		this.name = name;
+	}
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("META-INF/spring/appl-context.xml");
-		MessageDigester md = ctx.getBean("digester", MessageDigester.class);
-		md.digest("Hello World!");
+		Spring01 spr = ctx.getBean("main", Spring01.class);
+
+		System.out.println(spr.getName()+" date: "+spr.getDatez());
+
 		ctx.close();
 	}
+
 }
