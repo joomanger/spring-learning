@@ -8,8 +8,6 @@ public class Spring01 {
 
 	private Name name;
 	private Date datez;
-	
-	
 
 	public Date getDatez() {
 		return datez;
@@ -29,10 +27,17 @@ public class Spring01 {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		/*
+		 * краткая аннотация к проекту: Рассмотрено как регистрировать
+		 * пользовательские свойства. как имя Oleksiy Savin разложить на свойста
+		 * firstName и lastName объекта Name. также показан устанавливать свой
+		 * формат даты
+		 */
+
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("META-INF/spring/appl-context.xml");
 		Spring01 spr = ctx.getBean("main", Spring01.class);
 
-		System.out.println(spr.getName()+" date: "+spr.getDatez());
+		System.out.println(spr.getName() + " date: " + spr.getDatez());
 
 		ctx.close();
 	}

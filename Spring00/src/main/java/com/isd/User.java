@@ -1,13 +1,15 @@
 package com.isd;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
 @Component("user")
 public class User {
 	private String username = "Alex";
 	private String password = "password";
-	@Autowired
+	
+	@Resource(name="auto")
 	private Auto auto;
 
 	public User() {

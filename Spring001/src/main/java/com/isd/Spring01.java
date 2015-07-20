@@ -8,7 +8,9 @@ public class Spring01 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hello world!");
+		/*
+		 * Краткая аннотация к проекту: пример создании фабрики бина.
+		 */
 
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("META-INF/spring/appl-context.xml");
 		MessageDigester md = ctx.getBean("digester", MessageDigester.class);

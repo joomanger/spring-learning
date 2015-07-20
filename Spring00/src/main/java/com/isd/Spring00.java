@@ -32,7 +32,7 @@ public class Spring00 {
 	private List<String> list;
 
 	private FileInputStream fs = null;
-	
+
 	@PostConstruct
 	public void initMe() throws Exception {
 		System.out.println("initMe()");
@@ -41,6 +41,20 @@ public class Spring00 {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
+
+		/*
+		 * Краткая аннотация к проекту: работа с контекстом приложения, как
+		 * через xml файл конфигурации, так и через аннотации. Использования
+		 * util схемы для инъекции коллекций(map, properties, list, set).
+		 * использование lookyp-method для динамической подмены метода объекта.
+		 * Использования инициализации и дестроя через аннотации и xml файл
+		 * конфигурации контекста приложения. registerShutdownHook() - указывает
+		 * контейнеру для автоматического запуска PreDestroy метода. scope бина
+		 * равный prototype указывает контейнеру, что бин будет создаваться
+		 * каждый раз при обращении к нему. По умолчанию все бины являются
+		 * синглетонами.
+		 */
+
 		// TODO Auto-generated method stub
 		GenericXmlApplicationContext ac = new GenericXmlApplicationContext("META-INF/spring/appl-context.xml");
 		User user = ac.getBean("user", User.class);
@@ -58,7 +72,7 @@ public class Spring00 {
 		spr.displayInfo();
 
 		Spring00 spr2 = ac_annot.getBean("main", Spring00.class);
-		
+
 		spr2.displayInfo();
 
 		DemoBean stand = ac.getBean("standardLookupDemoBean", StandardLookupDemoBean.class);
@@ -67,10 +81,10 @@ public class Spring00 {
 		spr2.showMe(abstr);
 
 		System.out.println("The end!");
-		//ac.destroy();
-		//ac_annot.destroy();
+		// ac.destroy();
+		// ac_annot.destroy();
 	}
-	
+
 	@PreDestroy
 	public void destroyMe() throws Exception {
 		System.out.println("Выполняю destroyMe()");

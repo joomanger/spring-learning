@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+  						http://www.springframework.org/schema/context/spring-context.xsd
+  						http://www.springframework.org/schema/util
+  						http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="myBean1" class="com.isd.MyBean" p:dep-ref="myDependency1" />
+	<bean id="myBean2" class="com.isd.MyBean" p:dep-ref="myDependency2" />
+
+	<bean id="myDependencyTarget" class="com.isd.MyDependency" />
+
+	<bean id="advice" class="com.isd.aop.MyAdvice" />
+
+	<bean id="myDependency1" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:target-ref="myDependencyTarget" p:interceptorNames="advice" />
+	<bean id="myDependency2" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:target-ref="myDependencyTarget" p:interceptorNames="advisor" />
+
+	<bean id="myPointcut"
+		class="org.springframework.aop.aspectj.AspectJExpressionPointcut"
+		p:expression="execution(* foo*(..))" />
+
+	<bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
+		p:advice-ref="advice" p:pointcut-ref="myPointcut" />
+
+</beans>

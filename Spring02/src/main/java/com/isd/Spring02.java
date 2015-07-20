@@ -5,11 +5,14 @@ import java.util.Locale;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class Spring02 {
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("hello world!");
 
+		/*
+		 * краткая аннотация к проекту: пример локализации. управление событиями
+		 * и их слушателями
+		 */
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("appl-context.xml");
 
 		System.out.println(ctx.getMessage("msg", null, Locale.ENGLISH));
